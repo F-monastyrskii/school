@@ -6,29 +6,34 @@ import ru.hogwarts.school.model.Faculty;
 import java.util.HashMap;
 
 @Service
-public class FacultyServiceImpl {
+
+public class FacultyServiceImpl implements FacultyService {
 
     private final HashMap<Long, Faculty> faculties = new HashMap<>();
     private long count = 0;
 
-    public Faculty addFaculty (Faculty faculty) {
+    @Override
+    public Faculty addFaculty(Faculty faculty) {
         faculty.setId(count++);
-        faculties.put (faculty.getId(), faculty);
+        faculties.put(faculty.getId(), faculty);
         return faculty;
     }
 
-    public Faculty findFaculty(long id) {
+    @Override
+    public Faculty getFaculty(long id) {
         return faculties.get(id);
     }
 
+    @Override
     public Faculty editFaculty(long id, Faculty faculty) {
-        if (!faculties.containsKey(id)){
+        if (!faculties.containsKey(id)) {
             return null;
         }
         faculties.put(id, faculty);
         return faculty;
     }
 
+    @Override
     public void deleteFaculty(long id) {
         faculties.remove(id);
     }
