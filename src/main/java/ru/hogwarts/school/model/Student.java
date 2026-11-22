@@ -1,5 +1,6 @@
 package ru.hogwarts.school.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.Objects;
@@ -13,7 +14,9 @@ public class Student {
     private int age;
 
     @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn(name = "faculty_id")
+    @JoinColumn(name = "faculty_id" )
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})//возникала ошибка при запросе списка студентов по возрасту и поэтому
+    // было принято решение игнорировать служебные поля Hibernate в классе Student
     private Faculty faculty;
 
     public Student() {

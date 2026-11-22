@@ -19,6 +19,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student addStudent(Student student) {
+        student.setId(0L);
         return studentRepository.save(student);
     }
 
